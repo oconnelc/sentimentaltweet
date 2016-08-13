@@ -3,6 +3,7 @@ var sentiment = require('sentiment');
 var PropertiesReader = require('properties-reader');
 var properties = PropertiesReader('properties.txt');
 
+console.log(properties.get('twitter.keyword'))
 var client = new Twitter({
   consumer_key: properties.get('twitter.consumer_key'),
   consumer_secret: properties.get('twitter.consumer_secret'),
@@ -20,7 +21,7 @@ board.on("ready", function() {
   var badLed = new five.Led(12);
   var goodLed = new five.Led(13);
   client.stream('statuses/filter', {
-    track: 'Donald Trump'
+    track: properties.get('twitter.keyword')
   }, function(stream) {
     stream.on('data', function(tweet) {
       console.log(tweet.text);
@@ -30,7 +31,7 @@ board.on("ready", function() {
 
       if(tweetSentiment.score != 0) {
         var ledToUse = ((tweetSentiment.score < 0) ? badLed : goodLed);
-        ledToUse.blink();
+        ledToUse.blink();s
         board.wait(100, function() {
           console.log('TURNING OFF');
           ledToUse.stop().off();
