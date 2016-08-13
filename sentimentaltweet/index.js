@@ -51,7 +51,8 @@ app.use(function(req, res, next){
 });
 
 // Configure express to use handlebars templates
-app.engine('.hbs',exphbs({extname: '.hbs'}));
+app.engine('.hbs',exphbs({extname: '.hbs',
+}));
 app.set('view engine', '.hbs');
 
 //===============ROUTES===============
