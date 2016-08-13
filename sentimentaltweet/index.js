@@ -64,6 +64,13 @@ passport.use('local-signup', new LocalStrategy(
     });
   }
 ));
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 //===============EXPRESS================
 // Configure Express
